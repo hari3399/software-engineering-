@@ -1,0 +1,42 @@
+{% extends 'client/base_user.html' %}
+
+{% block content %}
+  <div class="container">
+    {% if subscribe %}
+      <div class="alert alert-danger">
+        <h3>Subscribe to a package to access premium features</h3>
+        <a href="{% url 'subscribe_package'  %}" class="btn btn-primary">Subscribe now</a>
+      </div>
+    {% else %}
+      <h2>Packages Available</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Tracking number</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for package in packages %}
+            <tr>
+              <td>{{ package.tracking_number }}</td>
+              <td>{{ package.description }}</td>
+              <td><a href="{% url 'pickup_package' package.id %}" class="btn btn-primary"></a>
+                {% if package.delivered %} 
+                  Info
+                {% else %}
+                  Pickup
+                {% endif%}
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3">No packages available.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

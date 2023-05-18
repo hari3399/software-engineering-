@@ -1,0 +1,17 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+  <h1>Property Details</h1>
+  <p><strong>Property ID:</strong> {{ property.property_id }}</p>
+  <p><strong>Address:</strong> {{ property.address }}</p>
+  <p><strong>Features:</strong> {{ property.features }}</p>
+
+  {% if lease_agreement %}
+    <h2>Current Lease Agreement</h2>
+    <p><strong>Start Date:</strong> {{ lease_agreement.start_date }}</p>
+    <p><strong>End Date:</strong> {{ lease_agreement.end_date }}</p>
+    <p><strong>Rent Amount:</strong> {{ lease_agreement.property.rent }}</p>
+  {% else %}
+    <p>No current lease agreement for this property.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'client/base_user.html' %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% block content %} {% if user.is_authenticated %}
+<h2>Complaints</h2>
+<div class="container">
+  <div class="row">
+    {% for complaint in complaints %}
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="card">
+        <div class="card-header">{{ complaint.title }}</div>
+        <div class="card-footer">
+          <a href="#">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<a href="{% url 'add_complaint' %}" class="btn btn-primary"
+  >Add New Complaint</a
+>
+
+{% else %}
+<h2>You are Not loged in</h2>
+<p><a href="{% url 'login' %}">Login as Manager</a></p>
+<p><a href="{% url 'login_user' %}">Login as Client</a></p>
+{% endif %} {% endblock %}

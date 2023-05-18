@@ -1,0 +1,26 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Announcements</h2>
+  <hr>
+  {% for announcement in announcements %}
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5>{{ announcement.title }}</h5>
+      <small class="text-muted">{{ announcement.date_created }}</small>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ announcement.message }}</p>
+    </div>
+  </div>
+  {% empty %}
+  <div class="alert alert-info">
+    No announcements found.
+  </div>
+  {% endfor %}
+  <a href="{% url 'add_announcement' %}" class="btn btn-primary">Add New Announcement</a>
+</div>
+
+{% endblock %}

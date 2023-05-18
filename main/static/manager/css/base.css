@@ -1,0 +1,79 @@
+/* CSS for the navbar */
+.navbar {
+    background-color: #333; /* set the background color of navbar */
+    overflow: hidden; /* hide the content that overflows the navbar */
+    position: fixed; /* position the navbar at the top of the page */
+    width: 100%; /* set the width to 100% */
+  }
+  
+  /* Style the links inside the navbar */
+  .navbar a {
+    float: right; /* align links to right */
+    color: rgb(5, 4, 4); /* set the text color */
+    text-align: center; /* center the text horizontally */
+    padding: 14px 16px; /* add padding to the links */
+    text-decoration: none; /* remove the underline */
+    font-size: 20px; /* set the font size */
+  }
+  
+  /* Add a logo to the left side of the navbar */
+  .navbar .logo {
+    float: left; /* align the logo to the left */
+    padding: 14px 16px; /* add padding to the logo */
+    font-size: 20px; /* set the font size */
+    font-weight: bold; /* set the font weight to bold */
+    color: white; /* set the text color */
+  }
+  
+  /* Style the links inside the navbar when hovered */
+  .navbar a:hover {
+    background-color: #ddd; /* set the background color on hover */
+    color: black; /* set the text color on hover */
+    font-size: 30px;
+  }
+  
+
+  /* CSS for the sidebar */
+  .sidebar {
+    height: 100%; /* set the height to 100% */
+    width: 250px; /* set the width to 250px */
+    position: fixed; /* position the sidebar */
+    z-index: 1; /* set the z-index to 1 */
+    top: 55px; /* set the top margin */
+    left: 0; /* set the left margin */
+    background-color: #f5f5f5; /* set the background color */
+    overflow-x: hidden; /* hide the horizontal scrollbar */
+    padding-top: 20px; /* add padding to the top */
+  }
+  
+  /* Style the links inside the sidebar */
+  .sidebar a {
+    padding: 6px 8px 6px 16px; /* add padding to the links */
+    text-decoration: none; /* remove the underline */
+    font-size: 15px; /* set the font size */
+    display: block; /* display the links as blocks */
+  }
+  
+  /* Add a background color to the active link in the sidebar */
+  .sidebar a.active {
+    background-color: #4CAF50; /* set the background color */
+    color: white; /* set the text color */
+  }
+  
+  /* Style the links inside the sidebar when hovered */
+  .sidebar a:hover:not(.active) {
+    background-color: #ddd; /* set the background color on hover */
+    color: black; /* set the text color on hover */
+  }
+
+  /* Add padding to the content area to prevent it from merging with the navbar */
+  .content {
+    padding-top: 80px;
+  }
+
+
+  #content-wrapper {
+    background-image: url("agree");
+    background-size: cover;
+    background-position: center;
+  }

@@ -1,0 +1,44 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <hr>
+    {% for package in packages %}
+    <div class="card mb-3">
+      <div class="card-header">
+        <h5>{{ package.leaseAgreement.client.user.username }}</h5>
+        <small class="text-muted">{{ package.tracking_number }}</small>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ package.description }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info">
+      No Undelivered Package found.
+    </div>
+    {% endfor %}
+  <h1>Add Package</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="client">Client:</label>
+      <select class="form-control" id="client" name="client">
+        {% for subscription in subscriptions %}
+          <option value="{{ subscription.client.user.username }}">{{ subscription.client.user.first_name }} {{ subscription.client.user.last_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="tracking_number">Tracking Number:</label>
+      <input type="text" class="form-control" id="tracking_number" name="tracking_number" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" name="description" rows="2" required></textarea>
+      </div>
+    <button type="submit" class="btn btn-primary">Add Package</button>
+  </form>
+</div>
+{% endblock %}

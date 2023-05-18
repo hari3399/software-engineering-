@@ -1,0 +1,196 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>Dashboard | Manager | Property Management</title>
+{% endblock %} {% block main %}
+
+<div id="wrapper">
+  <ul
+    class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    id="accordionSidebar"
+  >
+    <a
+      class="sidebar-brand d-flex align-items-center justify-content-center"
+      href="/"
+    >
+      <img
+        class="img-profile img mt-5"
+        src="{% static 'manager/img/logo.jpeg' %}"
+        height="100"
+        width="150"
+      />
+    </a>
+
+    <hr class="sidebar-divider my-0 mt-5" />
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'index' %}"
+        ><i class="fas fa-home"></i> Home
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'show_clients' %}"
+        ><i class="fas fa-users"></i> Clients
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'add_client' %}"
+        ><i class="fas fa-user"></i> Add New Client
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'assign_property' %}">
+        <i class="fas fa-building"></i> Assign Property
+      </a>
+    </li>
+
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'payments' %}"
+        ><i class="fas fa-bullhorn"></i> Payments
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'announcement' %}"
+        ><i class="fa fa-comment"></i> Announcement
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'complaints' %}"
+        ><i class="fas fa-bullhorn"></i> Complaints
+      </a>
+    </li>
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'add_package' %}"
+        ><i class="fas fa-shipping-fast"></i> Add Package
+      </a>
+    </li>
+
+    <hr class="sidebar-divider my-0" />
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin_info' %}"
+        ><i class="fas fa-shipping-fast"></i> Contact Admin
+      </a>
+    </li>
+
+    <hr class="sidebar-divider my-0" />
+
+    <hr class="sidebar-divider d-none d-md-block" />
+
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+  </ul>
+
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <nav
+        class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
+      >
+        <button
+          id="sidebarToggleTop"
+          class="btn btn-link d-md-none rounded-circle mr-3"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown no-arrow">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                {{ user.username }}
+              </span>
+              <img
+                class="img-profile rounded-circle mb-1"
+                src="{% static 'img/undraw_profile_2.svg' %}"
+              />
+            </a>
+
+            <div
+              class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+              aria-labelledby="userDropdown"
+            >
+              <a class="dropdown-item" href="{% url 'profile' %}">
+                <i
+                  class="fas fa-user-circle fa-sm fa-fw mr-2 text-gray-400"
+                ></i>
+                Profile
+              </a>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-toggle="modal"
+                data-target="#logoutModal"
+              >
+                <i
+                  class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                ></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      {% block content %}
+
+      <div class="container-fluid">
+        <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+      </div>
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Select "Logout" below if you are ready to end your current session.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+          Cancel
+        </button>
+        <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

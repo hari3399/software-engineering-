@@ -1,0 +1,47 @@
+{% extends 'client/base_user.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+  <h2>My Profile</h2>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+          Personal Information
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ user.get_full_name }}</h5>
+          <p class="card-text">Email: {{ user.email }}</p>
+          <p class="card-text">Phone: {{ client.phone_number }}</p>
+          <p class="card-text">Address: {{ client.address }}</p>
+     
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+          Lease Agreement Information
+        </div>
+        <div class="card-body">
+          {% if lease_agreement %}
+            <h5 class="card-title">Lease Agreement Details</h5>
+            <p class="card-text">Property: {{ lease_agreement.property }}</p>
+            <p class="card-text">Start Date: {{ lease_agreement.start_date }}</p>
+            <p class="card-text">End Date: {{ lease_agreement.end_date }}</p>
+            <p class="card-text">Monthly Rent: {{ lease_agreement.property.rent }}</p>
+          
+          {% else %}
+            <p class="card-text">You do not have any active lease agreement at the moment.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

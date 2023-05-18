@@ -1,0 +1,57 @@
+{% extends 'client/base_user.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% block content %}
+{% if user.is_authenticated %}
+
+  <h1>Make Payment for Lease Agreement {{ lease_agreement.id }}</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <p>
+    Rent per day: ${{ lease_agreement.property.rent }}<br>
+    Start date: {{ lease_agreement.start_date }}<br>
+    End date: {{ lease_agreement.end_date }}<br>
+    Total rent: ${{ total_rent }}<br>
+    Paid amount: ${{paid_amount}}<br>
+    Remaining amount: ${{remaining_amount}}<br>
+
+  </p>
+
+  {% if remaining_amount %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="amount">Payment amount ($):</label>
+      <input type="number" step="0.01" name="amount" id="amount" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="method">Payment method:</label>
+      <select name="method" id="method" class="form-control" required>
+        <option value="">Select method</option>
+        <option value="credit_card">Credit card</option>
+        <option value="debit_card">Debit card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cash">Cash</option>
+        <option value="check">Check</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Make Payment</button>
+  </form>
+
+  {% else %}
+  <div class="alert alert-{{ message.tags }}">
+   No Pending Payment Found 
+  </div>
+  {% endif %}
+
+{% else %}
+<h2>You are not loged in. Login to view page</h2>
+
+{% endif %}
+{% endblock %}

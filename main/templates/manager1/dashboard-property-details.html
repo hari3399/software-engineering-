@@ -1,0 +1,45 @@
+{% extends 'manager1/dashboard.html' %}
+{% load static %}
+{% block title %}
+<title>Property Details | Manager | Property Management</title>
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Property Details</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Property Information</h6>
+        </div>
+        <div class="card-body">
+          <p><strong>Property ID:</strong> {{ property.property_id }}</p>
+          <p><strong>Address:</strong> {{ property.address }}</p>
+          <p><strong>Description:</strong> {{ property.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Current Lease Agreement</h6>
+        </div>
+        <div class="card-body">
+          {% if lease_agreement %}
+          <p><strong>Client:</strong> {{ lease_agreement.client.user.first_name }}</p>
+          <p><strong>Start Date:</strong> {{ lease_agreement.start_date }}</p>
+          <p><strong>End Date:</strong> {{ lease_agreement.end_date }}</p>
+          <p><strong>Rent Amount:</strong> {{ lease_agreement.property.rent }}</p>
+          {% else %}
+          <p>No current lease agreement for this property.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'client1/dashboard.html' %} {% load static %} {% block title %}
+<title>Package | User | Property Management</title>
+{% endblock %} {% block content %}
+
+<div class="container-fluid">
+  {% if subscribe %}
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Packages Available</h1>
+  </div>
+
+  <table
+    class="table table-bordered text-gray-800"
+    id="dataTable"
+    width="100%"
+    cellspacing="0"
+  >
+    <thead>
+      <tr>
+        <th>Tracking number</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for package in packages %}
+      <tr>
+        <td>{{ package.tracking_number }}</td>
+        <td>{{ package.description }}</td>
+        <td>
+          <a
+            href="{% url 'pickup_package' package.id %}"
+            class="btn btn-primary"
+            >{% if package.delivered %} Info {% else %} Pickup {% endif%}</a
+          >
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No packages available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+
+  <div class="alert alert-danger">
+    <h3>Subscribe to a package to access premium features</h3>
+    <a href="{% url 'subscribe_package'  %}" class="btn btn-primary"
+      >Subscribe now</a
+    >
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}

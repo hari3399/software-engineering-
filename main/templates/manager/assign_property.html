@@ -1,0 +1,42 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+  <h2>Assign Property to Client</h2>
+  {% if messages %}
+    <div class="alert alert-{{ message_type }}" role="alert">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>        
+    </div>
+  {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="client_id">Client ID:</label>
+      <select class="form-control" id="client_id" name="client_id">
+        {% for client in available_clients %}
+          <option value="{{ client.user }}">{{ client.user }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="property_id">Property ID:</label>
+      <select class="form-control" id="property_id" name="property_id">
+        {% for property in available_properties %}
+          <option value="{{ property.property_id }}">{{ property.property_id }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="start_date">Start Date:</label>
+      <input type="date" class="form-control" id="start_date" name="start_date">
+    </div>
+    <div class="form-group">
+      <label for="end_date">End Date:</label>
+      <input type="date" class="form-control" id="end_date" name="end_date">
+    </div>
+    <button type="submit" class="btn btn-primary">Assign Property</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'client1/dashboard.html' %} {% load static %} {% block title %}
+<title>Home | User | Property Management</title>
+{% endblock %} {% block content %} {% if user.is_authenticated %}
+
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Welcome {{ client.name }}!</h1>
+  </div>
+
+  <div>
+    <div class="p-2 text-gray-800 mb-5">
+      <h4>Announcements</h4>
+      <hr />
+      {% for announcement in announcements %}
+      <div class="card mb-3 shadow">
+        <div class="card-header">
+          <h5 class="card-title">{{ announcement.title }}</h5>
+          <p class="card-text">
+            <small class="text-muted"
+              >{{ announcement.date_created|date:"F j, Y" }}</small
+            >
+          </p>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ announcement.message }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <div class="alert alert-info">No announcements found.</div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <h1>Please login to view the announcements.</h1>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

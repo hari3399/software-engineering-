@@ -1,0 +1,22 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+  <h1>My Profile</h1>
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <th>UserName:</th>
+        <td>{{ manager.user.username }}</td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td>{{ manager.user.email }}</td>
+      </tr>
+      <tr>
+        <th>Name :</th>
+        <td>{{ manager.user.first_name }} {{ manager.user.last_name }} </td>
+      </tr>
+    
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'client1/dashboard.html' %} 
+{% load static %} 
+
+{% block title %}
+<title>Property Details | User | Property Management</title>
+{% endblock %} 
+
+{% block content %} 
+
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Property Details</h1>
+  </div>
+
+  <div class="text-gray-800">
+    <p><strong>Property ID:</strong> {{ lease_agreement.property.property_id }}</p>
+    <p><strong>Address:</strong> {{ lease_agreement.property.address }}</p>
+  
+    {% if lease_agreement %}
+    <h2 class="mt-5">Current Lease Agreement</h2>
+    <p><strong>Start Date:</strong> {{ lease_agreement.start_date }}</p>
+    <p><strong>End Date:</strong> {{ lease_agreement.end_date }}</p>
+    <p><strong>Rent Amount:</strong> {{ lease_agreement.property.rent }}</p>
+    
+    {% if lease_agreement.agreement %}
+    <p><a href="{% url 'download_agreement' lease_agreement.id %}" class="btn btn-primary">Download Lease Agreement</a></p>
+    {% else %}
+    <p>No lease agreement file found.</p>
+    {% endif %}
+    
+    {% else %}
+    <p>No current lease agreement for this property.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends 'manager1/dashboard.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Payment History</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Lease Agreement ID</th>
+          <th>Amount Paid</th>
+          <th>Payment ID</th>
+          <th>Payment Date</th>
+          <th>Payment Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for payment in payments %}
+        <tr>
+          <td>{{ payment.client.user.first_name }}</td>
+          <td>{{ payment.lease_agreement.id }}</td>
+          <td>${{ payment.amount }}</td>
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.date_paid }}</td>
+          <td>{{ payment.method }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</br></br>
+  <h2>Pending Payments</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Lease Agreement ID</th>
+          <th>Amount Due</th> 
+        </tr>
+      </thead>
+      <tbody>
+        {% for pending_lease in pending_leases %}
+          <tr>
+            <td>{{ pending_lease.0.client.user.first_name }}</td>
+            <td>{{ pending_lease.0.id }}</td>
+            <td>${{ pending_lease.1 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

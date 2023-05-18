@@ -1,0 +1,36 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>Reply | Complaint | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Complaint Details</h1>
+  </div>
+
+  <div class="text-gray-800">
+    <p><strong>Title:</strong> {{ complaint.title }}</p>
+    <p><strong>Description:</strong> {{ complaint.description }}</p>
+    <p><strong>Date created:</strong> {{ complaint.date_created }}</p>
+
+    <h4 class="text-gray-800 mt-5">Reply Comlaint</h4>
+    <hr />
+
+    {% if complaint.resolved %}
+    <p><strong>Reply </strong> {{ complaint.reply }}</p>
+    {% else %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="reply">Reply:</label>
+        <textarea
+          class="form-control"
+          name="reply"
+          rows="5"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

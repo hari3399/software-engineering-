@@ -1,0 +1,45 @@
+{% extends 'manager1/dashboard.html' %}
+{% load static %}
+{% block title %}
+<title>Complaints | Manager | Property Management</title>
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Complaints</h1>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover" id="complaintsTable">
+      <thead>
+        <tr>
+          <th class="text-center">Complaint ID</th>
+          <th class="text-center">Client Name</th>
+          <th class="text-center">Description</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Reply</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for complaint in complaints %}
+        <tr>
+          <td class="text-center">{{ complaint.id }}</td>
+          <td class="text-center">{{ complaint.leaseAgreement.client.name }}</td>
+          <td class="text-center">{{ complaint.description }}</td>
+          <td class="text-center">{% if complaint.resolved %}Completed{% else %}Pending{% endif %}</td>
+          <td class="text-center">
+            <a href="{% url 'reply_to_complaint' complaint.id %}" class="btn btn-primary">
+              {% if complaint.resolved %}Replied{% else %}Reply{% endif %}
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center">No complaints found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

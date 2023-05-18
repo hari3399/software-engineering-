@@ -1,0 +1,42 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>Announcements | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Announcements</h1>
+  </div>
+
+  {% if messages %}
+  <div class="alert alert-{{ message_type }}" role="alert">
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="p-2 text-gray-800 mb-5">
+    {% for announcement in announcements %}
+    <div class="card mb-3 shadow">
+      <div class="card-header">
+        <h5 class="card-title">{{ announcement.title }}</h5>
+        <p class="card-text">
+          <small class="text-muted"
+            >{{ announcement.date_created|date:"F j, Y" }}</small
+          >
+        </p>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ announcement.message }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info">No announcements found.</div>
+    {% endfor %}
+    <a href="{% url 'add_announcement' %}" class="btn btn-primary"
+      >Add New Announcement</a
+    >
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>Add Package | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Package</h1>
+  </div>
+
+  {% for package in packages %}
+  <div class="col-12 col-md-4 mb-4">
+    <div class="card border-success shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{ package.leaseAgreement.client.user.username }}
+            </div>
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase my-2"
+            >
+              Tranking Number: {{ package.tracking_number }}
+            </div>
+            <div
+              class="text-xs font-weight-bold text-primary text-uppercase mt-2"
+            >
+              {{ package.description }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-building fa-2x text-gray-300"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="alert alert-info">No Undelivered Package found.</div>
+  {% endfor %}
+
+  <div class="p-2 my-5 text-gray-800">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="client">Client:</label>
+        <select class="form-control" id="client" name="client">
+          {% for subscription in subscriptions %}
+          <option value="{{ subscription.client.user.username }}">
+            {{ subscription.client.user.first_name }} {{ subscription.client.user.last_name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tracking_number">Tracking Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="tracking_number"
+          name="tracking_number"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          class="form-control"
+          name="description"
+          rows="2"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Package</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+
+  <h1 class="text-center">Complaints</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Complaint ID</th>
+          <th class="text-center">Client Name</th>
+          <th class="text-center">Description</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Reply</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for complaint in complaints %}
+          <tr>
+            <td class="text-center">{{ complaint.id }}</td>
+            <td class="text-center">{{ complaint.leaseAgreement.client.name }}</td>
+            <td class="text-center">{{ complaint.description }}</td>
+            <td class="text-center">{{ complaint.resolved }}</td>
+    
+           
+            <td class="text-center"><a href="{% url 'reply_to_complaint' complaint.id %}" class="btn btn-primary">
+                {% if complaint.resolved %}
+                Replyed
+                {% else %}
+                Reply
+                {% endif %}
+            </a></td>
+         
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" class="text-center">No complaints found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+
+
+

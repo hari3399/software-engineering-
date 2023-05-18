@@ -1,0 +1,38 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>Clients | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Clients</h1>
+  </div>
+
+  <table
+    class="table table-bordered text-gray-800"
+    id="dataTable"
+    width="100%"
+    cellspacing="0"
+  >
+    <thead>
+      <tr>
+        <th>Client ID</th>
+        <th>Client Name</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <td><a href="{% url 'client_details' client.user.id %}">{{ client.user.username }}</a></td>
+
+        <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
+        <td>{{ client.phone }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No clients found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+    <h1>Complaint Details</h1>
+    <p><strong>Title:</strong> {{ complaint.title }}</p>
+    <p><strong>Description:</strong> {{ complaint.description }}</p>
+    <p><strong>Date created:</strong> {{ complaint.date_created }}</p>
+  <h2>Reply Comlaint</h2>
+
+  {% if complaint.resolved %}
+  <p><strong>Reply </strong> {{ complaint.reply }}</p>
+  {% else %}
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="reply">Reply:</label>
+      <textarea class="form-control" name="reply" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Show Clients</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Client ID</th>
+        <th>Client Name</th>
+        <th>Phone </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <td>{{ client.user.username }}</td>
+        <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
+        <td>{{ client.phone }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No clients found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

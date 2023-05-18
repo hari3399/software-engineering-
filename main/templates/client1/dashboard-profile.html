@@ -1,0 +1,51 @@
+{% extends 'client1/dashboard.html' %} {% load static %} {% block title %}
+<title>My Profile | User | Property Management</title>
+{% endblock %} {% block content %}
+
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">My Profile</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+          Personal Information
+        </div>
+        <div class="card-body text-gray-800">
+          <h5 class="card-title">{{ user.first_name }}</h5>
+          <p class="card-text">Email: {{ user.email }}</p>
+          <p class="card-text">Phone: {{ client.phone }}</p>
+          <p class="card-text">Address: {{ client.pastAddress }}</p>
+          <a href="{% url 'update_password' %}" class="btn btn-primary">Change Password</a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+          Lease Agreement Information
+        </div>
+        <div class="card-body text-gray-800">
+          {% if lease_agreement %}
+          <h5 class="card-title">Lease Agreement Details</h5>
+          <p class="card-text">Property: {{ lease_agreement.property }}</p>
+          <p class="card-text">Start Date: {{ lease_agreement.start_date }}</p>
+          <p class="card-text">End Date: {{ lease_agreement.end_date }}</p>
+          <p class="card-text">
+            Monthly Rent: {{ lease_agreement.property.rent }}
+          </p>
+
+          {% else %}
+          <p class="card-text">
+            You do not have any active lease agreement at the moment.
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

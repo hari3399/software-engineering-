@@ -1,0 +1,24 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>My Profile | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">My Profile</h1>
+  </div>
+
+  <div class="text-gray-800 my-5">
+    <h3 class="text-gray-800 py-2">
+      Username:
+      <b>{{ manager.user.username }}</b>
+    </h3>
+    <h3 class="text-gray-800 py-2">
+      Email:
+      <b>{{ manager.user.email }}</b>
+    </h3>
+    <h3 class="text-gray-800 py-2">
+      Name:
+      <b>{{ manager.user.first_name }} {{ manager.user.last_name }}</b>
+    </h3>
+  </div>
+</div>
+{% endblock %}

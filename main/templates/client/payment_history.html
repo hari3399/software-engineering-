@@ -1,0 +1,24 @@
+
+{% extends 'client/base_user.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% block content %}
+{% if user.is_authenticated %}
+{% for payment  in paid_payments %}
+<tr>
+  <td class="text-center">{{ payment.id }}</td>
+  <td class="text-center">{{ payment.amount}}</td>
+  <td class="text-center">{{ payment.method }}</td>
+  <td class="text-center">{{ payment.date_paid }}</td> <br>
+
+</tr>
+{% empty %}
+<tr>
+  <td colspan="6" class="text-center">No payments found.</td>
+</tr>
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

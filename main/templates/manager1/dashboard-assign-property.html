@@ -1,0 +1,60 @@
+{% extends 'manager1/dashboard.html' %} {% load static %} {% block title %}
+<title>Assign Property | Manager | Property Management</title>
+{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Assign Property to Client</h1>
+  </div>
+
+  {% if messages %}
+  <div class="alert alert-{{ message_type }}" role="alert">
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="p-2 text-gray-800 mb-5">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="client_id">Client ID:</label>
+        <select class="form-control" id="client_id" name="client_id">
+          {% for client in available_clients %}
+          <option value="{{ client.user }}">{{ client.user }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="property_id">Property ID:</label>
+        <select class="form-control" id="property_id" name="property_id">
+          {% for property in available_properties %}
+          <option value="{{ property.property_id }}">
+            {{ property.property_id }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="start_date">Start Date:</label>
+        <input
+          type="date"
+          class="form-control"
+          id="start_date"
+          name="start_date"
+        />
+      </div>
+      <div class="form-group">
+        <label for="end_date">End Date:</label>
+        <input type="date" class="form-control" id="end_date" name="end_date" />
+      </div>
+      <label for="agreement">Lease Agreement:</label>
+      <input type="file" class="form-control-file" id="agreement" name="agreement" /></br>
+
+      <button type="submit" class="btn btn-primary">Assign Property</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
